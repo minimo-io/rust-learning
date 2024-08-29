@@ -7,6 +7,8 @@ fn main() {
 // this is a function, with an un-used char inside (in simple quotes)
 fn another_function_baby(x: i32){
     let some_char: char = '🥇';
+    // Only snake cas vars
+    let _some_other_char: String;
     println!("{some_char}");
     println!("{}", x);
 }
