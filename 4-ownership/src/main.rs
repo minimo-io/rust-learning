@@ -16,7 +16,48 @@
 // - When the owner goes out of scope, the value will be dropped
 
 fn main() {
-    let mut s = String::from("The Magnificent Seven");
-    s.push_str(", The Clash");
+    // let mut s = String::from("The Magnificent Seven");
+    // s.push_str(", The Clash");
+    // println!("{s}");
+
+    let s = String::from("hello");
+    use_s_on_the_heap(s); // this takes ownership and s is not available anymore (on the heap)
+    // println!("{s}"); // this will throw an error
+
+    let x = 5;
+    use_x_on_the_stack(x); // for variables on the stack a copy is made
+    println!("{x}"); // so this is ok
+
+    // ------------------------------
+    let ss = gives_ownership();
+    println!("{ss}");
+
+    let ss2 = String::from("String in the heat, mean heap");
+    let ss3 = takes_and_give_it_back(ss2);
+    println!("{ss3}");
+    let (ss4, len) = return_with_tuple(ss3);
+    println!("S4: {ss4} and length of {len}");
+
+    // Ownership rule of thumb, assigning a variable (on the heap) to another
+    // variables moves it: https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html
+    // Rust also makes it possible for using a value without taking ownership, its called references.
+}
+
+fn use_s_on_the_heap(s: String){
     println!("{s}");
+}
+fn use_x_on_the_stack(x: i32){
+    println!("{x}");
+}
+
+fn gives_ownership()->String{
+    let some_string = String::from("You own me");
+    some_string
+}
+fn takes_and_give_it_back(a_string: String) -> String{
+    a_string
+}
+fn return_with_tuple(some_string: String) -> (String, usize){
+    let length = some_string.len();
+    (some_string, length)
 }
