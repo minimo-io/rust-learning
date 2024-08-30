@@ -45,6 +45,7 @@ fn main() {
     // Here is a Tuple Struct
     struct Color( i32, i32, i32 );
     let black = Color(0, 0, 0);
+    
 
     // -----
     // UNIT LIKE STRUCTS are also a thing
