@@ -1,4 +1,5 @@
 // a general template, for an object like structure
+// struct let us create our custom types (they are not the only one, also enums can)
 struct User{
     active: bool,
     username: String,
