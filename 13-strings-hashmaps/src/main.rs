@@ -19,6 +19,7 @@ fn main() {
     let s = &cy[0..4];
     // println!("{}", &s);
     // let ss = &cy[0..1]; // will panic
+    // REMEMBER: We can only access (and point to) one byte of memory at a time, not less!
 
     // to operate with strings its best to be explicit
     // you want characters
