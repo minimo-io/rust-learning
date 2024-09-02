@@ -2,8 +2,8 @@
 
 use nostr_sdk::prelude::*;
 
-fn main() { 
-
+#[tokio::main]
+async fn main() -> Result<()> { 
     // Create keys
     // let my_keys: Keys = Keys::generate();
     // let hex_pubkey: String = my_keys.public_key().to_hex();
@@ -25,7 +25,7 @@ fn main() {
         Ok(keys) => keys,
         Err(error) => {
             eprintln!("Error parsing keys: {:?}", error);
-            return; // Exit program on error
+            return Err(error.into());
         }
     };
 
@@ -33,13 +33,22 @@ fn main() {
         Ok(pubkey) => pubkey,
         Err(error) => {
             eprintln!("Error converting to Bech32: {:?}", error);
-            return; // Exit program on error
+            return Err(error.into());
         }
     };
 
     println!("Bech32 PubKey: {}", bech32_pubkey);
 
+    // Directly create a client without matching against Result
     let client = Client::new(&my_keys);
-    // client.add_relay("wss://relay.damus.io").await.unwrap();
 
+    client.add_relay("wss://relay.damus.io").await?;
+    client.connect().await;
+
+    // Publish a text note
+    let note_result =client.publish_text_note("Say hello to a note from Rust!", []).await?;
+    println!("Note ID is: {}", note_result.to_string());
+
+
+    Ok(())
 }
