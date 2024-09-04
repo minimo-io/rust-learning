@@ -18,10 +18,10 @@ async fn main() -> Result<()> {
 
     // or use these already generated ones for testing purposes
     // nsec: nsec1ddvx2kul4frw0l4nsl0np3r7nc6m2kpgrqzxz7lr84u4mucgnntqds9xqx
-    // nPub: npub1hnguns63ppjyx997f86gnqhmw88jdhtejyxtcstc6ly6celj8rgq9w95et
-    // Hex: bcd1c9c35108644314be49f48982fb71cf26dd79910cbc4178d7c9ac67f238d0
 
-    let my_keys = match Keys::parse("nsec1ddvx2kul4frw0l4nsl0np3r7nc6m2kpgrqzxz7lr84u4mucgnntqds9xqx") {
+    let nsec_to_use = "nsec1ddvx2kul4frw0l4nsl0np3r7nc6m2kpgrqzxz7lr84u4mucgnntqds9xqx";
+    let my_keys = match Keys::parse(nsec_to_use) {
+        
         Ok(keys) => keys,
         Err(error) => {
             eprintln!("Error parsing keys: {:?}", error);
@@ -46,7 +46,7 @@ async fn main() -> Result<()> {
     client.connect().await;
 
     // Publish a text note
-    let note_result =client.publish_text_note("Say hello to a note from Rust!", []).await?;
+    let note_result =client.publish_text_note("Rustification process continues; first bot -> checked!", []).await?;
     println!("Note ID is: {}", note_result.to_string());
 
 
