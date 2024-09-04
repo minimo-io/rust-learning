@@ -121,3 +121,6 @@ fn read_username_from_file_4(filepath: String)-> Result<String, io::Error>{
 // And the same as with Result, WE CAN ONLY USE ? ON OPTION, IN A FUNCTION
 // THAT ALSO RETURNS AN OPTION (That is why at the end of main() i could not return ?)
 // since main() has a return type of ()
+
+
+// When failure is expected, it’s more appropriate to return a Result than to make a panic! call.
