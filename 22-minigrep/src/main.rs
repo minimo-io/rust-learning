@@ -1,33 +1,24 @@
 use std::env;
-use std::fs;
+use std::process;
+
+use minigrep::Config;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let config: Config = Config::new(&args);
-    // dbg!(args);
-
-    println!("In file {}", config.query);
-    let contents = fs::read_to_string(config.file_path).expect("Should have been able to read the file.");
-
-    println!("Wiht text: \n{contents}");
-
-    // println!("Searching {query}");
+    // Here with innovate with a closure for the first time in this tutorial
+    // these are anonymous functions passed to the unwrap_or_else
+    // to handle the error case of our Result
+    let config: Config = Config::build(&args).unwrap_or_else(|err|{
+        process::exit(1);
+    });
 
 
-}
-struct Config{
-    query: String,
-    file_path: String
-}
-impl Config{
-    fn new(args: &[String]) -> Config{
-        if args.len() < 3{
-            panic!("not enough arguments");
-        }
-
-        let query:String = args[1].clone();
-        let file_path = args[2].clone();
-    
-        Config{query, file_path}
+    // Instead of using a unwrap_or_else, in this case we do not have a value to unwrap (run fn retuns a
+    // unit vale instead), so we only care of handling the Error case, that's why we use an "if let"
+    if let Err(e) = minigrep::run(config){
+        process::exit(1);
     }
+
+
 }
+
