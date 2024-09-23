@@ -17,6 +17,39 @@
 // To run all tests and don't give a f about ignored tests run:
 // cargo test -- --include-ignored
 
+// --------------------------------------------------------------------------------
+
+// Rustaucians think of two types of tests: unit tests, and integration tests.
+
+// UNIT TESTS, are small tests, trying things out but in isolation.
+// Unit tests go in the src directory in each file along with the code they are testing
+// Convetion says that you create a module name tests and annotate it with cfg(test)
+// The #[cfg(test)] annotation tells Rust to only compile and run that when "cargo test" it.
+// cfg stands for configuration.
+
+// INTEGRATION TESTS use our library in the same way any other code
+// testing the public functions of our API.
+// Their goal is to test whether many parts of our library work together OK.
+// In Rust we create integration tests in a tests directory, at the top level, next to src.
+// Each file in the tests directory is compiled as its own separate crate.
+// Cargo treats the tests directory specially and compiles files in this directory only when we run cargo test, so no need for #[cfg(test)] annotation.
+
+//  if a unit test fails, there won’t be any output for integration and doc tests because those tests will only be run if all unit tests are passing.
+
+// To run all tests on a particular integartion test, we pass the following argument:
+// cargo test --test integration_test
+
+// To share code among several integration tests modules, we can create a subfolder, like this:
+// tests/common/mod.rs
+// "Files in subdirectories of the tests directory don’t get compiled as separate crates or have sections in the test output."
+
+// --------------------------------------------------------------------------------
+
+// IMPORTANT:
+// If our project is a binary crate that only contains a src/main.rs file and doesn’t have a src/lib.rs file, we can’t create integration tests in the tests directory.
+// This is why Rust projects that provide a binary have a straightforward src/main.rs file that calls logic that lives in the src/lib.rs file.
+// Using that structure, integration tests can test the library crate with use to make the important functionality available.
+
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
 }
