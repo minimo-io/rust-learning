@@ -8,8 +8,10 @@ pub struct Config {
     pub ignore_case: bool,
 }
 impl Config {
+    // we use the Iterator impl of the train as an argument
+    // returned by the env::args() method
     pub fn build(mut args: impl Iterator<Item = String>) -> Result<Config, &'static str> {
-        args.next();
+        args.next(); // because the first argument is the name of the program
 
         let query = match args.next() {
             Some(arg) => arg,
@@ -57,26 +59,32 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-// Because contents is the argument that contains all of our text and we want to return the parts of that text that match, we know contents is the argument that should be connected to the return value using the lifetime syntax.
+// Because contents is the argument that contains all of our text and
+// we want to return the parts of that text that match,
+// we know contents is the argument that should be connected to the return value using the lifetime syntax.
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    let mut results = Vec::new();
-    for line in contents.lines() {
-        if line.contains(query) {
-            results.push(line);
-        }
-    }
-    results
+    contents
+        .lines()
+        .filter(|line| line.contains(query))
+        .collect()
 }
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     let query = query.to_lowercase();
-    let mut results = Vec::new();
+    // let mut results = Vec::new();
 
-    for line in contents.lines() {
-        if line.to_lowercase().contains(&query) {
-            results.push(line);
-        }
-    }
-    results
+    // for line in contents.lines() {
+    //     if line.to_lowercase().contains(&query) {
+    //         results.push(line);
+    //     }
+    // }
+    // results
+    contents
+        .lines()
+        .filter(|line| line.to_lowercase().contains(query.as_str()))
+        .collect()
+
+    // which method to choose ? (the iterator style or the loops style?)
+    // Most rust programmers would choose the iterator
 }
 #[cfg(test)]
 mod tests {
