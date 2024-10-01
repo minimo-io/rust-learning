@@ -85,6 +85,7 @@ pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a st
 
     // which method to choose ? (the iterator style or the loops style?)
     // Most rust programmers would choose the iterator
+    // Iterators are one of Rust’s zero-cost abstractions, so prefer them!
 }
 #[cfg(test)]
 mod tests {
