@@ -1,7 +1,30 @@
+//! # lib.rs minigrep
+//!
+//! A certain structs with imppl methods
+//! for adding the grep functionality written in Rust
+//! These type of comments are useful for explaining the purpose of the crate
+//! These comments describe the element they are contained into,
+//! instead of describing the element after them.
+//! So they are useful for describing the general purpose of crates, modules and binaries.
+
 use std::env;
 use std::error::Error;
 use std::{fs, vec};
 
+pub use self::kinds::Colors;
+
+/// This is public Config struct
+/// # An example
+/// Remember that we can create Markdown text and also code snippets like the one below.
+/// But the snippet will be tested!
+/// ```
+///     use std::env;
+///     use minigrep::Config;
+///     let config: Config = Config::build(env::args()).unwrap_or_else(|err| {
+///         eprintln!("Problem parsing arguments: {err}");
+///         // process::exit(1);
+///     });
+/// ```
 pub struct Config {
     pub query: String,
     pub file_path: String,
@@ -117,5 +140,12 @@ Trust me.
             vec!["Rust:", "Trust me."],
             search_case_insensitive(query, contents)
         );
+    }
+}
+
+pub mod kinds {
+    pub enum Colors {
+        Green,
+        Red,
     }
 }

@@ -2,5 +2,7 @@
 name = "minigrep"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+description = "A minimal grep command line program written in Rust"
 
 [dependencies]

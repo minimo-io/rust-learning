@@ -1,6 +1,7 @@
 use std::env;
 use std::process;
 
+// use minigrep::Colors;
 use minigrep::Config;
 
 fn main() {
