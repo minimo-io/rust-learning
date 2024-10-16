@@ -1,0 +1,5 @@
+# A workspace is a set of packages that share the same Cargo.lock and output directory.
+# ch14-03-cargo-workspaces.html
+
+[workspace]
+members = ["adder", "add_one"]
