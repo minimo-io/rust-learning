@@ -1,3 +1,6 @@
+//! Smart pointers, Deref impl trait
+//! By minimo_io
+
 use std::ops::Deref;
 
 fn main() {
