@@ -1,4 +1,5 @@
 //! Reference counting Smart Pointer, Rc<T>
+//! ---------------------------------------
 //! Using Rc<T> allows a single value to have multiple owners, for reading only.
 //!
 //! We use the Rc<T> type when we want to allocate some data on the heap for multiple parts
