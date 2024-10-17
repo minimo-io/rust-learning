@@ -43,3 +43,4 @@ fn main() {
     std::mem::drop(var3); // force drop it!
     println!("Force dropeed var3 before the end of main");
 }
+
