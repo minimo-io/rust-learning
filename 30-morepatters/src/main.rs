@@ -120,6 +120,33 @@ fn main() {
             println!("First ({first}) and last ({last}) value of a tuple, ignoring the rest.")
         }
     }
+
+    // Match Guards, an additional if condition
+    // specified after the match arm
+    // this condition can use variables created in the pattern
+    // Let's check it out
+    let num = Some(4);
+    match num {
+        Some(x) if x % 4 == 0 => println!("The number {x} is even"),
+        Some(x) => println!("The number {x} is odd"),
+        None => (),
+    }
+    // Downside is that Rust does not check for exhaustiveness when a
+    // match guard is involved
+
+    // We can also specify multiple patterns in a Match Guard
+    let xx = 4;
+    let yy = false;
+    match xx {
+        4 | 5 | 6 if yy => println!("Yes!"),
+        _ => println!("Nop :/"),
+    }
+    // The first arm of the above code matches if xx is 4, 5 or 6 and yy=true
+    // and not only if 6 and yy=true
+
+    // Finally, there is the @ operator
+    // for testing a value AND saving it in a variable within one pattern.
+    // More here: https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html#-bindings
 }
 
 #[derive(Debug)]
