@@ -3,7 +3,7 @@
 //! So normally we can only define a trait if EITHER the trait or the type are local
 //! to our crate.
 //!
-//! Get get around that rule we can use the 'newtype pattern', a concept coined
+//! Get around that rule we can use the 'newtype pattern', a concept coined
 //! at Haskell.
 //!
 //! In this example from the book (https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types)
