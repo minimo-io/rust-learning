@@ -10,6 +10,8 @@ pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
     // Build the trait implementation
     impl_hello_macro(&ast)
 }
+// for every custom derive macro, this is the part that will change mostly
+// the actual implementation.
 fn impl_hello_macro(ast: &syn::DeriveInput) -> TokenStream {
     let name = &ast.ident;
     let gen = quote! {
